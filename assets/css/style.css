@@ -1,0 +1,7 @@
+button {
+    justify-content: center;
+    height: 100px;
+    width: 200px;
+    display: flex;
+    margin: auto;
+}
