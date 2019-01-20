@@ -8,4 +8,22 @@ button {
 
 #mainDiv {
     display: none;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+}
+
+/*it would be cool to create an animated cursor pointer*/
+li:hover {
+    cursor: help;
+    background-image: url(../images/estrellas.gif); 
+    color: white;
+    
+}
+
+li {
+    /*this attribute with value of 'none' remove the bullent point form li tags. How awesome! */
+    list-style-type: none;
 }
