@@ -1,6 +1,5 @@
 $(document).ready(function() {
 
-
 //Create an array of question objects to loop through
 var questions = [
     {
@@ -16,54 +15,57 @@ var questions = [
         answer2: 'dos',
         answer3: 'tres',
         correctAnswer: 'dos',
+    },
+    {
+        askQuestion: 'Test question #3?', 
+        answer1: 'uno',
+        answer2: 'dos',
+        answer3: 'tres',
+        correctAnswer: 'tres',
     }
 ];
+
 //initialize global variable that will hold the time 
 var timeIsUp = 0; 
 var secondsPerQuestion = 30;   //30 seconds
 //initialize variables to keep track of scores
-var score = 0;
+//var score = 0;
 var correct = 0;
 var wrong = 0;
-var questionIndex = 0;  //this can help to keep track of which question is being generated
 var userInput; //here I want to capture the value of the li tag the user clicks
 var i = 0;
-var ticktock;
-var showNextQuestion;
+var ticktock; //timer
 
-
-
-
+//we need the timer to stop ]/freeze when results are displayed at the end of the game
+//var clockRunning = false;
 
 //select button tag & start on click function
 var startButton = $('button').on('click', function() {
     //select button tag to be removed, and later replaced with new html content (questions)
     $('button').remove();  //esta esta funcionando bien!
-    //call loopThroughQuestions funciton
-    //loopThroughQuestions(); 
     //show hidden html
     $('#mainDiv').show();
+    //show timer
+    $('.timer').show();
     printQuestion();
-    //generateQuestion();
     //display time
-    //$('#timeCountDown').text(30);
     timeCount();
-    var ticktock = setInterval(timeCount, 1000);
-
+    //set interval
+    ticktock = setInterval(timeCount, 1000);
 });
 
 function printQuestion() {
     if(i  < questions.length) {
         $('h2').text(questions[i].askQuestion);
-                //$('.firstOption').attr('value', questions[i].answer1);  //attributes are always strings
-                //$('.secondOption').attr('value', questions[i].answer2);
-                //$('.thirdOption').attr('value', questions[i].answer3);
         $('.firstOption').text(questions[i].answer1);
         $('.secondOption').text(questions[i].answer2);
         $('.thirdOption').text(questions[i].answer3); //1st question and 1st set of answers are printed on the page uffff! x fin!!!!!
-        userClickedLi();
-        
-        
+        secondsPerQuestion = 30;
+        userClickedLi();   
+    }else{
+        //show results
+        alert('last index number');
+        displayResults();
     }
 };
 
@@ -75,19 +77,21 @@ $('li').on('click', function() {
     userInput = $(this).text(); 
     if(userInput === questions[i].correctAnswer) { 
         console.log(userInput);
-        score++;
-        $('#perQuestionScore').text(score);  //I am not required to display the point here, but I will keep it here for now
+        correct++;
+        $('#correct').text(correct);  //I am not required to display the point here, but I will keep it here for now
                 //animated alert congratulating user
-        //$('.firstOption').detach(questions[i].answer1);
-        //$('.secondOption').detach(questions[i].answer2);
-        //$('.thirdOption').detach(questions[i].answer3);
+    
         //increment the index number in 'questions' array 
-        //if(i  < questions.length - 1) {
-         i++;
+        i++;
         console.log([i]);
         //if var i is less than questions.length, generate the next question
-        printQuestion();    
+        printQuestion();
+        userClickedLi();  
+        //since i is being incremented after we run the last question index number, I am getting an error of undefined 
+        //a solution would be to prevent our printQuestion function from running if index number exceeds the existing ones  
     }else{
+        wrong++;
+        $('#wrong').text(wrong);
                 //alert user answer is wrong and display the correct answer
                 //increment wrong by 1
                 //printQuestion();
@@ -101,17 +105,20 @@ function timeCount() { //esta esta funcionando bien
         //$('#timeCountDown').innerHTML = count;
         $('#timeCountDown').text(secondsPerQuestion);
         secondsPerQuestion--;
+        //clockRunning = true;
     }else{
         //reset time per question back to 30 seconds
         secondsPerQuestion = 30;
     }
 };
 
-
-//this function will have an if/else statement to compare the user's input to the answers
-function conditionsCorrectAnswer() {
-     
-}
+function displayResults() {
+    $('#mainDiv').remove();
+    $('#resultsDiv').show();
+    //I need to stop the timer
+    clearInterval(ticktock);
+    //clockRunning = false;          
+};
 
 //closes $(document).ready(function() 
 });

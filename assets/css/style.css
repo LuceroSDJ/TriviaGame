@@ -6,17 +6,21 @@ button {
     margin: auto;
 }
 
-#mainDiv {
+#mainDiv, #resultsDiv, .timer {
     display: none;
     text-align: center;
 }
 
-h1 {
+/*#resultsDiv {
+    display: none;
+}*/
+
+h1, p {
     text-align: center;
 }
 
 /*it would be cool to create an animated cursor pointer*/
-li:hover {
+li:hover, #restart:hover {
     cursor: help;
     background-image: url(../images/estrellas.gif); 
     color: white;

@@ -19,31 +19,47 @@
 
 <!-- empty div will be replaced -->
 <div class='container'>
-        <div class="row justify-content-center">
-        <div class='row'>
-            <div class='col-md-12' style='background: pink'>
-                <div class='emptyDiv'>
-                <h1>Trivia Game!</h1>
-                <button class='buttonToBeReplaced'>Start</button>
-                    <div id='mainDiv'>
-                        <div><p>Time Remaining: <span id='timeCountDown'></span></p></div>
-                        <!-- add questions  -->
-                        <h2></h2>
-                        
-                        <ul>
-                            <!--<li class='firstOption' value='one' onclick="alert(this.innerHTML)"></li>-->
-                            <li class='firstOption' value='one'></li>
-                            <li class='secondOption' value='two'></li>
-                            <li class='thirdOption' value='three'></li>
-                        </ul> 
-                        <button id='submitAnswers'>How did I do?</button>
-                        <div id='perQuestionScore'></div>
-                    </div>
+    <div class='row'>
+        <div class='col-md-12' style='background: pink'>
+            <div class='emptyDiv'>
+            <h1>Trivia Game!</h1>
+            <button class='buttonToBeReplaced'>Start</button>
+            <div class='timer'><p>Time Remaining: <span id='timeCountDown'></span></p></div>
+                <div id='mainDiv'>
+                    <!-- <div><p>Time Remaining: <span id='timeCountDown'></span></p></div> -->
+                    <!-- add questions  -->
+                    <h2></h2>
+                    <ul>
+                        <!--<li class='firstOption' value='one' onclick="alert(this.innerHTML)"></li>-->
+                        <li class='firstOption' value='one'></li>
+                        <li class='secondOption' value='two'></li>
+                        <li class='thirdOption' value='three'></li>
+                    </ul> 
+                </div>
+                <div id='resultsDiv'>
+                    <p>Correct Answers: <span id='correct'></span></p>
+                    <p>Incorrect Answers: <span id='wrong'></span></p>
+                    <p>Unanswered: <span id='unanswered'></span></p>
+                    <br>
+                    <p id='restart'>Start Over?</p>
                 </div>
             </div>
         </div>
-        </div>
+    </div>
 </div>
+
+<!--
+<div class="container">
+    <div class="row justify-content-center">
+        <div class='col-md-12' style='background: pink'>
+            <div id='resultsDiv'>
+                <p>Correct Answers: <span id='correct'></span></p>
+                <p>Incorrect Answers: <span id='wrong'></span></p>
+                <p>Unanswered: <span id='unanswered'></span></p>
+            </div>
+        </div>
+    </div>
+</div> -->
     
     <!-- CDN Link to jQuery website: this method saves the jQuery file in the browser's memory -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
