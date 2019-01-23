@@ -6,7 +6,7 @@ button {
     margin: auto;
 }
 
-#mainDiv, #resultsDiv, .timer {
+#mainDiv, #resultsDiv, .timer, .correctAlert, .incorrectAlert, .winMssg, .mssg {
     display: none;
     text-align: center;
 }
