@@ -11,19 +11,25 @@
     <!-- Link to css file -->
     <link rel='stylesheet' text='text/css' href='assets/css/style.css'>
     <!-- Google Fonts link to be added-->
+    <link href="https://fonts.googleapis.com/css?family=Faster+One|Merienda+One|Shojumaru" rel="stylesheet">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 
 
 </head>
-<body>
+<body >
+
+
+<div class="wrapper">  <!-- mx-auto centers our container -->
 
 <!-- empty div will be replaced -->
 <div class='container'>
     <div class='row'>
-        <div class='col-md-12' style='background: pink'>
+        <div class='col-md-12'>
             <div class='emptyDiv'>
             <h1>Trivia Game!</h1>
-            <button class='buttonToBeReplaced'>Start</button>
+            <button class='buttonToBeReplaced'>Start Game</button>
             <div class='timer'><p>Time Remaining: <span id='timeCountDown'></span></p></div>
                 <div id='mainDiv'>
                     <!-- <div><p>Time Remaining: <span id='timeCountDown'></span></p></div> -->
@@ -43,10 +49,25 @@
                     <br>
                     <p id='restart'>Start Over?</p>
                 </div>
+
+
+                <div class = 'correctAlert'>Animated alert goes here.<br>Display when user answers correcttly</div>
+                <div class = 'incorrectAlert'>Animated alert goes here</div>
+                <div class = 'imgDiv'>
+                    <p class = 'winMssg'>You got it!</p>
+                </div>
+                <div class = 'imgDivIncorrect'>
+                    <p class = 'mssg'>Not the answer!</p>
+                </div>
+
+
+
             </div>
         </div>
     </div>
 </div>
+
+<!--
 <div class = 'correctAlert'>Animated alert goes here.<br>Display when user answers correcttly</div>
 <div class = 'incorrectAlert'>Animated alert goes here</div>
 <div class = 'imgDiv'>
@@ -55,6 +76,13 @@
 <div class = 'imgDivIncorrect'>
         <p class = 'mssg'>Not the answer!</p>
 </div>
+
+</div> -->
+
+
+
+
+
 
 
 <!--
@@ -69,6 +97,11 @@
         </div>
     </div>
 </div> -->
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
     
     <!-- CDN Link to jQuery website: this method saves the jQuery file in the browser's memory -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>

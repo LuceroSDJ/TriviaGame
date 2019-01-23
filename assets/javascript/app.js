@@ -158,6 +158,8 @@ function correctImgAlert() {
     $('#mainDiv').hide();
     var image = $('<img>');
     image.prop('src', questions[i].imgCorrect);
+    image.css('height', '20%');
+    image.css('width', '25%');
     $('.imgDiv').append(image);
     //I need to stop the timer
     clearInterval(ticktock);
@@ -183,6 +185,8 @@ function incorrectImgAlert() {
     var image = $('<img>');
     image.prop('src', questions[i].imgIncorrect);
     $('.imgDivIncorrect').append(image);
+    image.css('height', '20%');
+    image.css('width', '25%');
     //I need to stop the timer
     clearInterval(ticktock);
     //$('.imgDiv').show();
