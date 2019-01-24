@@ -39,7 +39,7 @@ h1, p, .imgDiv, .imgDivIncorrect {
 /*it would be cool to create an animated cursor pointer*/
 li:hover, #restart:hover {
     cursor: help;
-    background-image: url(../images/estrellas.gif); 
+    background-image: url(../images/testB6.gif); 
     color: white;
     
 }
@@ -51,6 +51,7 @@ li, .timer, .winMssg, .mssg, #resultsDiv {
     font-size: 26px;
     text-shadow: 3px 3px #73AD21;
     color: #6d2247;
+    padding: 13px;
 }
 
 body {
@@ -73,5 +74,6 @@ h2 {
     font-size: 28px;
     color: #a40063;
     text-shadow: 3px 3px #9dfdef;
+    
 }
 

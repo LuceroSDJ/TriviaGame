@@ -9,7 +9,7 @@ var questions = [
         answer3: 'Steve Jobs & Steve Harvey',
         correctAnswer: 'Steve Jobs & Steve Wozniak', //this indicates the index number of the correct answer(not anymore). Now, it represents the value
         imgCorrect: 'assets/images/person1.jpg',
-        imgIncorrect: 'assets/images/estrellas.gif',
+        imgIncorrect: 'assets/images/box1.gif',
     },
     {
         askQuestion: 'Which pair of innovators are the authors of Mosaic, the 1st widely used Web Browser, and founders of Netscape?', 
@@ -17,8 +17,8 @@ var questions = [
         answer2: 'Marc Andreessen & Eric Bina',
         answer3: 'Marc Anthony & Eric Bana',
         correctAnswer: 'Marc Andreessen & Eric Bina',
-        imgCorrect: 'assets/images/testIMG2.gif',
-        imgIncorrect: 'assets/images/estrellas.gif',
+        imgCorrect: 'assets/images/box3.jpg',
+        imgIncorrect: 'assets/images/box1.gif',
     },
     {
         askQuestion: 'Which company, also known as the Internet\'s "Big Bang," introduced the world wide "Navigator" Web Browser in the mid 1990\'s, and developed JavaScript to animate the Web?', 
@@ -26,8 +26,8 @@ var questions = [
         answer2: 'Nescafé',
         answer3: 'Nestcape',
         correctAnswer: 'Nestcape',
-        imgCorrect: 'assets/images/testIMG3.gif',
-        imgIncorrect: 'assets/images/estrellas.gif',
+        imgCorrect: 'assets/images/box4.jpg',
+        imgIncorrect: 'assets/images/box1.gif',
     }
 ];
 
