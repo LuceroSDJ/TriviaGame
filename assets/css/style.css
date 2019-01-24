@@ -9,7 +9,7 @@ button {
 .emptyDiv {
     width: 80%;
     height: 80%;
-    border: 3px solid #73AD21;
+    border: 6px solid #73AD21;
     background-image: url(../images/box2.jpg);
     background-size: cover;
     background-repeat: no-repeat;
@@ -32,10 +32,6 @@ button {
     text-align: center;
 }
 
-/*#resultsDiv {
-    display: none;
-}*/
-
 h1, p, .imgDiv, .imgDivIncorrect {
     text-align: center;
 }
@@ -51,8 +47,10 @@ li:hover, #restart:hover {
 li, .timer, .winMssg, .mssg, #resultsDiv {
     /*this attribute with value of 'none' remove the bullent point form li tags. How awesome! */
     list-style-type: none;
-    font-family: 'Merienda One', cursive;
-    font-size: 25px;
+    font-family: 'Shojumaru', cursive;
+    font-size: 26px;
+    text-shadow: 3px 3px #73AD21;
+    color: #6d2247;
 }
 
 body {
@@ -67,11 +65,13 @@ h1 {
     font-family: 'Faster One', cursive;
     font-size: 70px;
     color: #063a78;
+    text-shadow: 3px 3px rgb(146, 204, 65);
 }
  
 h2 {
-    font-family: 'Shojumaru', cursive;
-    font-size: 40px;
-    color: #6d2247;
+    font-family: 'Merienda One', cursive;
+    font-size: 28px;
+    color: #a40063;
+    text-shadow: 3px 3px #9dfdef;
 }
 

@@ -12,27 +12,27 @@ var questions = [
         imgIncorrect: 'assets/images/estrellas.gif',
     },
     {
-        askQuestion: 'Test question #2?', 
-        answer1: 'uno',
-        answer2: 'dos',
-        answer3: 'tres',
-        correctAnswer: 'dos',
+        askQuestion: 'Which pair of innovators are the authors of Mosaic, the 1st widely used Web Browser, and founders of Netscape?', 
+        answer1: 'Marc Mozart & Eric Carr',
+        answer2: 'Marc Andreessen & Eric Bina',
+        answer3: 'Marc Anthony & Eric Bana',
+        correctAnswer: 'Marc Andreessen & Eric Bina',
         imgCorrect: 'assets/images/testIMG2.gif',
         imgIncorrect: 'assets/images/estrellas.gif',
     },
     {
-        askQuestion: 'Test question #3?', 
-        answer1: 'uno',
-        answer2: 'dos',
-        answer3: 'tres',
-        correctAnswer: 'tres',
+        askQuestion: 'Which company, also known as the Internet\'s "Big Bang," introduced the world wide "Navigator" Web Browser in the mid 1990\'s, and developed JavaScript to animate the Web?', 
+        answer1: 'Microsoft',
+        answer2: 'Nescafé',
+        answer3: 'Nestcape',
+        correctAnswer: 'Nestcape',
         imgCorrect: 'assets/images/testIMG3.gif',
         imgIncorrect: 'assets/images/estrellas.gif',
     }
 ];
 
 //initialize global variable that will hold the time 
-var secondsPerQuestion = 30;   //30 seconds
+var secondsPerQuestion = 3;   //30 seconds
 //initialize variables to keep track of scores
 //var score = 0;
 var unasnwered = 0;
@@ -41,7 +41,7 @@ var wrong = 0;
 var userInput; //here I want to capture the value of the li tag the user clicks
 var i = 0;
 var ticktock; //timer
-var holdAlert;
+
 //array with images to alert win 
 //var correctImages = ['assets/images/testIMG1.gif', 'assets/images/testIMG2/gif', 'assets/images/testIMG3'];
 //var incorrectImges = ['assets/images/testIMG3.gif', 'assets/images/testIMG2.gif', 'assets/images/testIMG1'];
@@ -67,10 +67,11 @@ var holdAlert;
 function printQuestion() {
     if(i  < questions.length) {
         $('h2').text(questions[i].askQuestion);
+        console.log('i am iside of: ' + i);
         $('.firstOption').text(questions[i].answer1);
         $('.secondOption').text(questions[i].answer2);
         $('.thirdOption').text(questions[i].answer3); 
-        secondsPerQuestion = 30;
+        secondsPerQuestion = 3;
         //userClickedLi();   
    //}else if(questions[i] === questions.length) {
         //i = 0;
@@ -104,10 +105,8 @@ $('li').on('click', function() {
         //imgae alert for 3 seconds
         correctImgAlert();
         console.log([i]);
-        i++;
         console.log([i]);
         //if var i is less than questions.length, generate the next question
-        printQuestion();
         //userClickedLi();  
         //since i is being incremented after we run the last question index number, I am getting an error of undefined 
         //a solution would be to prevent our printQuestion function from running if index number exceeds the existing ones 
@@ -117,9 +116,14 @@ $('li').on('click', function() {
         $('#wrong').text(wrong);
         //alert user answer is wrong and display the correct answer
         incorrectImgAlert();
-        i++;
-        printQuestion();           
+                 
+    }else if(!userInput && 0 === secondsPerQuestion) {
+        unasnwered++;
+        console.log(unasnwered);
+        $('#unasnwered').text(unasnwered);    
     }
+    i++;
+    printQuestion(); 
 });
 
 
@@ -167,25 +171,28 @@ function incorrectImgAlert() {
         //i++;
         //printQuestion();  
     }, 2000);
-    //then, I need to display the alert message for only 3 seconds
+    //then, I need to display the alert message for only 2 seconds
 }
 
 function timeCount() { //esta esta funcionando bien
     //set conditions for when the time should be running
-    if(0 <= secondsPerQuestion) {
+    console.log('seconds per question' + secondsPerQuestion);
+    if(0 < secondsPerQuestion) {
         //$('#timeCountDown').innerHTML = count;
         $('#timeCountDown').text(secondsPerQuestion);
         secondsPerQuestion--;
-        if(0 === secondsPerQuestion) {
-            unasnwered++;
-            $('#unasnwered').text(unasnwered);
-            i++;
-            printQuestion();
-        }
-        //clockRunning = true;
-    //}else{
-        //reset time per question back to 30 seconds
-        //secondsPerQuestion = 30;
+        //if(0 === secondsPerQuestion) {
+            //unasnwered++;
+            //console.log(unasnwered);
+            //$('#unasnwered').text(unasnwered);
+            //i++;
+            //}
+    }else if(0 === secondsPerQuestion) {
+        
+        i++;
+        console.log('this is i: ' + i);
+        printQuestion();
+
     }
 };
 
