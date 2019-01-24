@@ -3,12 +3,12 @@ $(document).ready(function() {
 //Create an array of question objects to loop through
 var questions = [
     {
-        askQuestion: 'Test question #1?', 
-        answer1: 'one',
-        answer2: 'two',
-        answer3: 'three',
-        correctAnswer: 'one', //this indicates the index number of the correct answer(not anymore). Now, it represents the value
-        imgCorrect: 'assets/images/testIMG1.gif',
+        askQuestion: 'Which pair of genius minds founded Apple Computer Inc. in 1976 releasing the world\'s first mass-market personal computer?', 
+        answer1: 'Steve Jobs & Steve Wozniak',
+        answer2: 'Steve Jobs & Steve Carell',
+        answer3: 'Steve Jobs & Steve Harvey',
+        correctAnswer: 'Steve Jobs & Steve Wozniak', //this indicates the index number of the correct answer(not anymore). Now, it represents the value
+        imgCorrect: 'assets/images/person1.jpg',
         imgIncorrect: 'assets/images/estrellas.gif',
     },
     {
@@ -32,7 +32,6 @@ var questions = [
 ];
 
 //initialize global variable that will hold the time 
-var timeIsUp = 0; 
 var secondsPerQuestion = 30;   //30 seconds
 //initialize variables to keep track of scores
 //var score = 0;
@@ -77,7 +76,6 @@ function printQuestion() {
         //i = 0;
     }else{
         clearInterval(ticktock);
-        //i = 0; //this fixed the error 'i' undefined
         console.log(i);
         //show results
         //alert('last index number');
@@ -89,14 +87,7 @@ function printQuestion() {
       }, 2000);   
 }};
 
-function iTOzero() {
-    if(i === questions.length - 1) {
-        i = 0;
-        printQuestion();
-    }
-};
-
- //now, how can I make the options clickable: made changes in css file
+//now, how can I make the options clickable: made changes in css file
 /* next, I have to create a click event funciton to capture when an li tag is clicked on.
 Effect: declare conditions comparing user's input to the  VALUE of 'correctAnswer' */
 //function userClickedLi() {
@@ -112,8 +103,6 @@ $('li').on('click', function() {
         //increment the index number in 'questions' array 
         //imgae alert for 3 seconds
         correctImgAlert();
-        
-        
         console.log([i]);
         i++;
         console.log([i]);
@@ -121,37 +110,18 @@ $('li').on('click', function() {
         printQuestion();
         //userClickedLi();  
         //since i is being incremented after we run the last question index number, I am getting an error of undefined 
-        //a solution would be to prevent our printQuestion function from running if index number exceeds the existing ones  
-
-    }else if (userInput !== questions[i].correctAnswer && i < questions.length) {
+        //a solution would be to prevent our printQuestion function from running if index number exceeds the existing ones 
+    }else if(userInput !== questions[i].correctAnswer && i < questions.length) {
         //increment wrong by 1
         wrong++;
         $('#wrong').text(wrong);
         //alert user answer is wrong and display the correct answer
         incorrectImgAlert();
-     
-
         i++;
         printQuestion();           
     }
-    /*else{
-        holdUnanswered();
-    }*/
 });
 
-
-function holdUnanswered() {
-    var delayUnasnwered = setTimeout(function(){
-        if(secondsPerQuestion === timeIsUp) {
-        i++;
-        printQuestion();
-        }
-
-    },30000);    
-};
-//}
-
-holdUnanswered();
 
 //when user answers a question correctly, an animated alert showd be displayed
 function correctImgAlert() {
@@ -165,17 +135,12 @@ function correctImgAlert() {
     clearInterval(ticktock);
     //$('.imgDiv').show();
     $('.winMssg').show();
-    
-    //ticktock = setInterval(timeCount, 1000);
     holdAlert = setTimeout(function() {  
         $('.winMssg').hide();
         $('.imgDiv').empty();
         $('#mainDiv').show();
-        //secondsPerQuestion = 30;
         timeCount();
-        ticktock = setInterval(timeCount, 1000);
-        //i++;
-        //printQuestion();  
+        ticktock = setInterval(timeCount, 1000); 
     }, 2000);
     //then, I need to display the alert message for only 3 seconds
 }
@@ -205,14 +170,18 @@ function incorrectImgAlert() {
     //then, I need to display the alert message for only 3 seconds
 }
 
-
-
 function timeCount() { //esta esta funcionando bien
     //set conditions for when the time should be running
-    if(timeIsUp <= secondsPerQuestion) {
+    if(0 <= secondsPerQuestion) {
         //$('#timeCountDown').innerHTML = count;
         $('#timeCountDown').text(secondsPerQuestion);
         secondsPerQuestion--;
+        if(0 === secondsPerQuestion) {
+            unasnwered++;
+            $('#unasnwered').text(unasnwered);
+            i++;
+            printQuestion();
+        }
         //clockRunning = true;
     //}else{
         //reset time per question back to 30 seconds
@@ -221,33 +190,33 @@ function timeCount() { //esta esta funcionando bien
 };
 
 function displayResults() {
-    $('#mainDiv').remove();
+    $('#mainDiv').hide();
     $('#resultsDiv').show();
     //I need to stop the timer
     clearInterval(ticktock);
     //clockRunning = false;          
 };
 
-//function restart() {
+
     $('#restart').on('click', function() {
-        
-        correct = 0;
+        i = 0;
+        printQuestion();correct = 0;
         wrong = 0;
         unasnwered = 0;
         $('#resultsDiv').hide();
         $('#mainDiv').show();
+        timeCount();
+        //set interval
+        ticktock = setInterval(timeCount, 1000);
         // i must be set back to zero. i has been set back to zero, however, the question is not regenerated (bug) *********
-        i = 0;
-        printQuestion();
         
-
     });
     //when restart button is clicked do the following:
     //i must be reset back to 0
     //first question needs to be reprinted, then second and so on
     
     //timer reset to 30 seconds
-//};
+
 
 //left off on line 87
 //bug: see line 155
