@@ -32,22 +32,14 @@ var questions = [
 ];
 
 //initialize global variable that will hold the time 
-var secondsPerQuestion = 3;   //30 seconds
+var secondsPerQuestion = 5;   //50 seconds
 //initialize variables to keep track of scores
-//var score = 0;
-var unasnwered = 0;
+var userInput; //here I want to capture the value of the li tag the user clicks
+var ticktock; //timer
+var unanswered = 0;
 var correct = 0;
 var wrong = 0;
-var userInput; //here I want to capture the value of the li tag the user clicks
 var i = 0;
-var ticktock; //timer
-
-//array with images to alert win 
-//var correctImages = ['assets/images/testIMG1.gif', 'assets/images/testIMG2/gif', 'assets/images/testIMG3'];
-//var incorrectImges = ['assets/images/testIMG3.gif', 'assets/images/testIMG2.gif', 'assets/images/testIMG1'];
-
-//we need the timer to stop ]/freeze when results are displayed at the end of the game
-//var clockRunning = false;
 
 //select button tag & start on click function
     $('button').on('click', function() {
@@ -58,12 +50,12 @@ var ticktock; //timer
     //show timer
     $('.timer').show();
     printQuestion();
-    //display time
+    //decrement time per second with setInterval
     timeCount();
-    //set interval
     ticktock = setInterval(timeCount, 1000);
 });
 
+//generate question
 function printQuestion() {
     if(i  < questions.length) {
         $('h2').text(questions[i].askQuestion);
@@ -71,60 +63,49 @@ function printQuestion() {
         $('.firstOption').text(questions[i].answer1);
         $('.secondOption').text(questions[i].answer2);
         $('.thirdOption').text(questions[i].answer3); 
-        secondsPerQuestion = 3;
-        //userClickedLi();   
+        secondsPerQuestion = 5;  
    //}else if(questions[i] === questions.length) {
         //i = 0;
     }else{
         clearInterval(ticktock);
         console.log(i);
-        //show results
-        //alert('last index number');
+        // hold results for 2 seconds then show results
         var holdResults = setTimeout(function() { 
             console.log('release results');
-            displayResults();
-            //clearInterval(ticktock); it does not seem to have any effect if I remove it 
-            //restart();
+            displayResults();  
       }, 2000);   
 }};
 
-//now, how can I make the options clickable: made changes in css file
-/* next, I have to create a click event funciton to capture when an li tag is clicked on.
-Effect: declare conditions comparing user's input to the  VALUE of 'correctAnswer' */
+
+/*Next, create a click event funciton to capture when an li tag is clicked on.
+& declare conditions comparing user's input to the  VALUE of 'correctAnswer' */
 //function userClickedLi() {
 $('li').on('click', function() { 
     userInput = $(this).text(); 
+    //if var i is less than questions.length, generate the next question
     if(userInput === questions[i].correctAnswer && i < questions.length) {
         console.log(userInput);
         correct++;
         $('#correct').text(correct);  //I am not required to display the point here, but I will keep it here for now
-                //animated alert congratulating user
-                            //$('#mainDiv').remove(); //I will make a funciton outside this function and call it back here once it is ready
-                            //$('.correctAlert').show(); //i want to display an animated alert for 3 seconds
-        //increment the index number in 'questions' array 
-        //imgae alert for 3 seconds
-        correctImgAlert();
-        console.log([i]);
-        console.log([i]);
-        //if var i is less than questions.length, generate the next question
-        //userClickedLi();  
-        //since i is being incremented after we run the last question index number, I am getting an error of undefined 
-        //a solution would be to prevent our printQuestion function from running if index number exceeds the existing ones 
+        //hold image alert for 3 seconds congratulating the user
+        correctImgAlert(); 
+        //prevent our printQuestion function from running if current questions index number is equal to questions.length
     }else if(userInput !== questions[i].correctAnswer && i < questions.length) {
         //increment wrong by 1
         wrong++;
         $('#wrong').text(wrong);
         //alert user answer is wrong and display the correct answer
-        incorrectImgAlert();
-                 
-    }else if(!userInput && 0 === secondsPerQuestion) {
-        unasnwered++;
-        console.log(unasnwered);
-        $('#unasnwered').text(unasnwered);    
-    }
+        incorrectImgAlert();            
+    }//else if(!userInput && 0 === secondsPerQuestion) {
+        unanswered++;
+        console.log(unanswered);
+        $('#unanswered').text(unanswered);    
+    //}
+    //increment the index number in 'questions' array 
     i++;
     printQuestion(); 
 });
+//};
 
 
 //when user answers a question correctly, an animated alert showd be displayed
@@ -174,34 +155,27 @@ function incorrectImgAlert() {
     //then, I need to display the alert message for only 2 seconds
 }
 
-function timeCount() { //esta esta funcionando bien
+function timeCount() { 
     //set conditions for when the time should be running
     console.log('seconds per question' + secondsPerQuestion);
     if(0 < secondsPerQuestion) {
-        //$('#timeCountDown').innerHTML = count;
+        secondsPerQuestion--; //I changed the order of lines 162 & 163, now timer reaches zero
         $('#timeCountDown').text(secondsPerQuestion);
-        secondsPerQuestion--;
-        //if(0 === secondsPerQuestion) {
-            //unasnwered++;
-            //console.log(unasnwered);
-            //$('#unasnwered').text(unasnwered);
-            //i++;
-            //}
-    }else if(0 === secondsPerQuestion) {
-        
+    }else if(!userInput && 0 === secondsPerQuestion) {
+        unanswered++;
+        $('#unanswered').text(unanswered);
         i++;
         console.log('this is i: ' + i);
         printQuestion();
-
     }
 };
 
+//we need the timer to stop /freeze when results are displayed at the end of the game
 function displayResults() {
     $('#mainDiv').hide();
     $('#resultsDiv').show();
-    //I need to stop the timer
-    clearInterval(ticktock);
-    //clockRunning = false;          
+    //Stop timer from running while results are displayed
+    clearInterval(ticktock);        
 };
 
 
