@@ -32,17 +32,17 @@ var questions = [
 ];
 
 //initialize global variable that will hold the time 
-var secondsPerQuestion = 5;   //50 seconds
+var secondsPerQuestion = 6;   //50 seconds
 //initialize variables to keep track of scores
 var userInput; //here I want to capture the value of the li tag the user clicks
 var ticktock; //timer
-var unanswered = 0;
-var correct = 0;
-var wrong = 0;
-var i = 0;
+var unanswered = 0; //increment by 1 if unanswered
+var correct = 0; //increment by 1 if answered correctly
+var wrong = 0; //increment by onw if answered incorrectly
+var i = 0; //questions array index of objects
 
 //select button tag & start on click function
-    $('button').on('click', function() {
+$('button').on('click', function() {
     //select button tag to be removed, and later replaced with new html content (questions)
     $('button').remove();  //esta esta funcionando bien!
     //show hidden html
@@ -58,12 +58,15 @@ var i = 0;
 //generate question
 function printQuestion() {
     if(i  < questions.length) {
+        //reset time 
+        secondsPerQuestion = 6;
+        //add question 
         $('h2').text(questions[i].askQuestion);
         console.log('i am iside of: ' + i);
         $('.firstOption').text(questions[i].answer1);
         $('.secondOption').text(questions[i].answer2);
         $('.thirdOption').text(questions[i].answer3); 
-        secondsPerQuestion = 5;  
+       
    //}else if(questions[i] === questions.length) {
         //i = 0;
     }else{
@@ -90,26 +93,39 @@ $('li').on('click', function() {
         //hold image alert for 3 seconds congratulating the user
         correctImgAlert(); 
         //prevent our printQuestion function from running if current questions index number is equal to questions.length
+        i++;
+        printQuestion(); 
+        
+        
     }else if(userInput !== questions[i].correctAnswer && i < questions.length) {
         //increment wrong by 1
         wrong++;
         $('#wrong').text(wrong);
         //alert user answer is wrong and display the correct answer
-        incorrectImgAlert();            
-    }//else if(!userInput && 0 === secondsPerQuestion) {
+        incorrectImgAlert();  
+        i++;
+        printQuestion();             
+    }else if(!userInput && 0 === secondsPerQuestion) {
         unanswered++;
-        console.log(unanswered);
-        $('#unanswered').text(unanswered);    
-    //}
+        $('#unanswered').text(unanswered);
+        i++;
+        console.log('this is i: ' + i);
+        //secondsPerQuestion = 6;
+        printQuestion();
+    }
+        
+    
     //increment the index number in 'questions' array 
-    i++;
-    printQuestion(); 
+    
+    //i++;
+    //printQuestion(); 
 });
 //};
 
 
 //when user answers a question correctly, an animated alert showd be displayed
 function correctImgAlert() {
+    clearInterval(ticktock);
     $('#mainDiv').hide();
     var image = $('<img>');
     image.prop('src', questions[i].imgCorrect);
@@ -117,7 +133,6 @@ function correctImgAlert() {
     image.css('width', '25%');
     $('.imgDiv').append(image);
     //I need to stop the timer
-    clearInterval(ticktock);
     //$('.imgDiv').show();
     $('.winMssg').show();
     holdAlert = setTimeout(function() {  
@@ -128,17 +143,18 @@ function correctImgAlert() {
         ticktock = setInterval(timeCount, 1000); 
     }, 2000);
     //then, I need to display the alert message for only 3 seconds
-}
+};
 
 function incorrectImgAlert() {
+    clearInterval(ticktock);
     $('#mainDiv').hide();
     var image = $('<img>');
     image.prop('src', questions[i].imgIncorrect);
     $('.imgDivIncorrect').append(image);
     image.css('height', '20%');
     image.css('width', '25%');
+    $('#showCorrectAnswer').text(questions[i].correctAnswer);
     //I need to stop the timer
-    clearInterval(ticktock);
     //$('.imgDiv').show();
     $('.mssg').show();
     //ticktock = setInterval(timeCount, 1000);
@@ -153,29 +169,32 @@ function incorrectImgAlert() {
         //printQuestion();  
     }, 2000);
     //then, I need to display the alert message for only 2 seconds
-}
+};
 
 function timeCount() { 
     //set conditions for when the time should be running
     console.log('seconds per question' + secondsPerQuestion);
     if(0 < secondsPerQuestion) {
-        secondsPerQuestion--; //I changed the order of lines 162 & 163, now timer reaches zero
+        secondsPerQuestion--; //I changed the order of lines 168 & 169, now timer reaches zero
         $('#timeCountDown').text(secondsPerQuestion);
     }else if(!userInput && 0 === secondsPerQuestion) {
         unanswered++;
         $('#unanswered').text(unanswered);
         i++;
         console.log('this is i: ' + i);
+        //secondsPerQuestion = 6;
         printQuestion();
     }
 };
+//timeCount();
 
 //we need the timer to stop /freeze when results are displayed at the end of the game
 function displayResults() {
+    //Stop timer from running while results are displayed
+    clearInterval(ticktock);
     $('#mainDiv').hide();
     $('#resultsDiv').show();
-    //Stop timer from running while results are displayed
-    clearInterval(ticktock);        
+            
 };
 
 
