@@ -18,6 +18,17 @@ button.buttonToBeReplaced {
 }
 
 button#musicOn, button#musicOff {
+    background-image: url(../images/testB6.gif); 
+    font-family: 'Shojumaru', cursive;
+    justify-content: center;
+    text-shadow: 8px 8px #063a78;
+    height: 40px;
+    width: 80px;
+    color: white;
+    font-size: 22px;
+    overflow: auto;
+    position: relative;
+    left: 40%; 
     
 }
 
@@ -30,7 +41,7 @@ button#musicOn, button#musicOff {
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center;
-    position:absolute;
+    position: absolute;
     left:0; 
     right:0;
     top:0; 
