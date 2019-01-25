@@ -32,19 +32,24 @@ var questions = [
 ];
 
 //initialize global variable that will hold the time 
-var secondsPerQuestion = 5;   //50 seconds. Here I am adding an extra second because there is a delay, which I will keep trying to fix.
+var secondsPerQuestion = 50;   //50 seconds. Here I am adding an extra second because there is a delay, which I will keep trying to fix.
 //initialize variables to keep track of scores
 var userInput; //here I want to capture the value of the li tag the user clicks
-var ticktock; //timer
+var ticktock; //setInterval
 var unanswered = 0; //increment by 1 if unanswered
 var correct = 0; //increment by 1 if answered correctly
 var wrong = 0; //increment by onw if answered incorrectly
 var i = 0; //questions array index of objects
 
+//test music
+var audio = document.createElement("audio");
+audio.setAttribute("src", "assets/images/Audio1.mp3");
+
 //select button tag & start on click function
 $('button').on('click', function() {
+    audio.play();
     //select button tag to be removed, and later replaced with new html content (questions)
-    $('button').remove();  //esta esta funcionando bien!
+    $('button').remove();  
     //show hidden html
     $('#mainDiv').show();
     //show timer
@@ -65,12 +70,11 @@ function printQuestion() {
         $('.secondOption').text(questions[i].answer2);
         $('.thirdOption').text(questions[i].answer3); 
         //reset time 
-        secondsPerQuestion = 5;
-
+        secondsPerQuestion = 50;
     }else{
         clearInterval(ticktock);
         console.log(i);
-        // hold results for 2 seconds then show results
+        // hold results for 5 seconds then show results
         var holdResults = setTimeout(function() { 
             console.log('release results');
             displayResults(); 
@@ -100,13 +104,7 @@ $('li').on('click', function() {
         incorrectImgAlert();  
         i++;
         printQuestion();             
-    }/*else if(!userInput || 0 === secondsPerQuestion) {
-        unanswered++;
-        $('#unanswered').text(unanswered);
-        i++;
-        console.log('this is i: ' + i);
-        printQuestion();
-    } */  
+        };
     });
 
 //when user answers a question correctly, an animated alert showd be displayed
@@ -119,7 +117,7 @@ function correctImgAlert() {
     image.css('width', '40%');
     $('.imgDiv').append(image);
     $('.winMssg').show();
-    //then, I need to display the alert message for only 2 seconds
+    //then, I need to display the alert message for only 5 seconds
     holdAlert = setTimeout(function() {  
         $('.winMssg').hide();
         $('.imgDiv').empty();
@@ -147,8 +145,7 @@ function unansweredAlert() {
         timeCount();
         ticktock = setInterval(timeCount, 1000); 
     }, 5000);
-
-}
+};
 
 function incorrectImgAlert() {
     clearInterval(ticktock);
@@ -204,6 +201,7 @@ function displayResults() {
 i must be reset back to 0
 first question needs to be reprinted*/
 $('#restart').on('click', function() {
+    audio.pause();
     correct = 0;
     $('#correct').text(correct);
     wrong = 0;
