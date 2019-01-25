@@ -74,7 +74,7 @@ function printQuestion() {
         var holdResults = setTimeout(function() { 
             console.log('release results');
             displayResults(); 
-    }, 2000);   
+    }, 5000);   
 }};
 
 
@@ -126,8 +126,29 @@ function correctImgAlert() {
         $('#mainDiv').show();
         timeCount();
         ticktock = setInterval(timeCount, 1000); 
-    }, 2000);
+    }, 5000);
 };
+
+function unansweredAlert() {
+    clearInterval(ticktock);
+    $('#mainDiv').hide();
+    var image = $('<img>');
+    image.prop('src', questions[i].imgCorrect);
+    image.css('height', '35%');
+    image.css('width', '40%');
+    $('.imgDiv').append(image);
+    $('.showCorrectAnswer').text(questions[i].correctAnswer);
+    $('.unansweredMssg').show();
+    //then, I need to display the alert message for only 2 seconds
+    holdAlert = setTimeout(function() {  
+        $('.unansweredMssg').hide();
+        $('.imgDiv').empty();
+        $('#mainDiv').show();
+        timeCount();
+        ticktock = setInterval(timeCount, 1000); 
+    }, 5000);
+
+}
 
 function incorrectImgAlert() {
     clearInterval(ticktock);
@@ -137,7 +158,7 @@ function incorrectImgAlert() {
     $('.imgDivIncorrect').append(image);
     image.css('height', '35%');
     image.css('width', '40%');
-    $('#showCorrectAnswer').text(questions[i].correctAnswer);
+    $('.showCorrectAnswer').text(questions[i].correctAnswer);
     $('.mssg').show();
     //then, I need to display the alert message for only 2 seconds
     holdAlert = setTimeout(function() {  
@@ -146,7 +167,7 @@ function incorrectImgAlert() {
         $('#mainDiv').show();
         timeCount();
         ticktock = setInterval(timeCount, 1000); 
-    }, 2000);  
+    }, 5000);  
 };
 
 function timeCount() { 
@@ -158,13 +179,16 @@ function timeCount() {
     /*the else if statement below will take us to the next question with NO USER INPUT
     it works if the first question goes unanswered or if all questions go unanswered only */
     }else if(!userInput || 0 === secondsPerQuestion) {  
+        if(i < questions.length) {
         $('#timeCountDown').text(secondsPerQuestion);
         unanswered++;
         $('#unanswered').text(unanswered);
+        unansweredAlert();
         i++;
         console.log('this is i: ' + i);
         printQuestion();
-    }
+        };
+    };
 };
 
 

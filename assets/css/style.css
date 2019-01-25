@@ -40,7 +40,7 @@ button {
    
 }
 
-#mainDiv, #resultsDiv, .timer, .correctAlert, .incorrectAlert, .winMssg, .mssg {
+#mainDiv, #resultsDiv, .timer, .correctAlert, .incorrectAlert, .winMssg, .mssg, .unansweredMssg {
     display: none;
     text-align: center;
     
@@ -60,7 +60,7 @@ li:hover, #restart:hover {
     
 }
 
-li, .timer, .winMssg, .mssg, #resultsDiv {
+li, .timer, .winMssg, .mssg, #resultsDiv, .unansweredMssg {
     /*this attribute with value of 'none' remove the bullent point form li tags. How awesome! */
     list-style-type: none;
     font-family: 'Shojumaru', cursive;
