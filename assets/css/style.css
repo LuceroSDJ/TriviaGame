@@ -1,4 +1,4 @@
-button {
+button.buttonToBeReplaced {
     justify-content: center;
     height: 200px;
     width: 450px;
@@ -15,8 +15,10 @@ button {
     color: white;
     overflow: auto;
     text-shadow: 8px 8px #063a78;
+}
 
-
+button#musicOn, button#musicOff {
+    
 }
 
 

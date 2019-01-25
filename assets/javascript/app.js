@@ -45,11 +45,19 @@ var i = 0; //questions array index of objects
 var audio = document.createElement("audio");
 audio.setAttribute("src", "assets/images/Audio1.mp3");
 
+$('#musicOn').on('click', function() {
+    audio.play();
+});
+
+$('#musicOff').on('click', function() {
+    audio.pause();
+});
+
 //select button tag & start on click function
-$('button').on('click', function() {
+$('.buttonToBeReplaced').on('click', function() {
     audio.play();
     //select button tag to be removed, and later replaced with new html content (questions)
-    $('button').remove();  
+    $('.buttonToBeReplaced').remove();  
     //show hidden html
     $('#mainDiv').show();
     //show timer
