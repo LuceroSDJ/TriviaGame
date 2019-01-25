@@ -1,20 +1,33 @@
 button {
     justify-content: center;
-    height: 100px;
-    width: 200px;
+    height: 200px;
+    width: 450px;
     display: flex;
     margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    font-family: 'Shojumaru', cursive;
+    font-size: 30px;
+    border-radius: 20px;
+    background-image: url(../images/testB6.gif); 
+    color: white;
+    overflow: auto;
+    text-shadow: 8px 8px #063a78;
+
+
 }
+
 
 .emptyDiv {
     width: 80%;
     height: 80%;
     border: 6px solid #73AD21;
     background-image: url(../images/box2.jpg);
-    background-size: cover;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center;
-    justify-content: center;
     position:absolute;
     left:0; 
     right:0;
@@ -30,10 +43,13 @@ button {
 #mainDiv, #resultsDiv, .timer, .correctAlert, .incorrectAlert, .winMssg, .mssg {
     display: none;
     text-align: center;
+    
+    
 }
 
 h1, p, .imgDiv, .imgDivIncorrect {
     text-align: center;
+    padding: 10px;
 }
 
 /*it would be cool to create an animated cursor pointer*/
@@ -52,6 +68,7 @@ li, .timer, .winMssg, .mssg, #resultsDiv {
     text-shadow: 3px 3px #73AD21;
     color: #6d2247;
     padding: 13px;
+    
 }
 
 body {
@@ -73,7 +90,64 @@ h2 {
     font-family: 'Merienda One', cursive;
     font-size: 28px;
     color: #a40063;
-    text-shadow: 3px 3px #9dfdef;
+    text-shadow: 3px 3px #73AD21;
+    
     
 }
 
+/****************MEDIA QUERIES******************/
+/** desktop layout size **/
+@media screen and (max-width: 980px) {
+
+}
+
+/** tablet screen size **/
+@media screen and (max-width: 768px) {
+    li, .timer, .winMssg, .mssg, #resultsDiv {
+        font-size: 21px;
+    }
+    h1 {
+        font-size: 50px;
+    }
+    h2 {
+        font-size: 24px;
+         color: black;
+    }
+    .emptyDiv {
+        width: auto;
+    }
+    button {
+        height: 150px;
+        width: 400px;
+        font-size: 25px;
+    }
+}
+
+
+/** phone in landscape screen size **/
+@media screen and (max-width: 640px) {
+    li, .timer, .winMssg, .mssg, #resultsDiv {
+        font-size: 18px;
+    }
+    h1 {
+        font-size: 45px;
+        
+    }
+    h2 {
+        font-size: 20px;
+        color: black;
+    }
+    .emptyDiv {
+        width: auto;
+    
+    }
+    button {
+        height: 150px;
+        width: 250px;
+        font-size: 20px;
+    }
+
+}
+
+
+  
