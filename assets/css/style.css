@@ -34,6 +34,8 @@ button#musicOn, button#musicOff {
     width: 80%;
     height: 80%;
     border: 6px solid #73AD21;
+    padding: 10px;
+    box-shadow: 16px 18px black;
     background-image: url(../images/box2.jpg);
     background-size: 100% 100%;
     background-repeat: no-repeat;
@@ -74,12 +76,12 @@ li, .timer, .winMssg, .mssg, #resultsDiv, .unansweredMssg {
     font-size: 26px;
     text-shadow: 3px 3px #73AD21;
     color: #6d2247;
-    padding: 13px;
-    
+    padding: 13px;  
 }
 
 body {
     background-image: url(../images/button1.gif);
+    opacity: 0.8;
 }
 
 img {

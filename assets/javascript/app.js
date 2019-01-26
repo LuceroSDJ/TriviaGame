@@ -198,7 +198,6 @@ function timeCount() {
     };
 };
 
-
 //we need the timer to stop /freeze when results are displayed at the end of the game
 function displayResults() {
     //Stop timer from running while results are displayed
@@ -211,7 +210,6 @@ function displayResults() {
 i must be reset back to 0
 first question needs to be reprinted*/
 $('#restart').on('click', function() {
-    audio.pause();
     correct = 0;
     $('#correct').text(correct);
     wrong = 0;
