@@ -22,16 +22,13 @@ button#musicOn, button#musicOff {
     font-family: 'Shojumaru', cursive;
     justify-content: center;
     text-shadow: 8px 8px #063a78;
-    height: 40px;
-    width: 80px;
+    width: 168px;
+    height: 35px;
     color: white;
-    font-size: 22px;
-    overflow: auto;
-    position: relative;
-    left: 40%; 
-    
+    font-size: 18px;
+    border-radius: 20px;
+    display: flex;  
 }
-
 
 .emptyDiv {
     width: 80%;
@@ -49,20 +46,17 @@ button#musicOn, button#musicOff {
     margin:auto;
     max-width:100%;
     max-height:100%;
-    overflow:auto;
-   
+    overflow:auto;  
 }
 
 #mainDiv, #resultsDiv, .timer, .correctAlert, .incorrectAlert, .winMssg, .mssg, .unansweredMssg {
     display: none;
-    text-align: center;
-    
-    
+    text-align: center;    
 }
 
 h1, p, .imgDiv, .imgDivIncorrect {
     text-align: center;
-    padding: 10px;
+    padding: 5px;
 }
 
 /*it would be cool to create an animated cursor pointer*/
@@ -109,11 +103,6 @@ h2 {
 }
 
 /****************MEDIA QUERIES******************/
-/** desktop layout size **/
-@media screen and (max-width: 980px) {
-
-}
-
 /** tablet screen size **/
 @media screen and (max-width: 768px) {
     li, .timer, .winMssg, .mssg, #resultsDiv {
@@ -129,13 +118,17 @@ h2 {
     .emptyDiv {
         width: auto;
     }
-    button {
+    button.buttonToBeReplaced {
         height: 150px;
         width: 400px;
         font-size: 25px;
     }
+    button#musicOn, button#musicOff {
+        width: 155px;
+        font-size: 17px;
+        border-radius: 20px;
+    }
 }
-
 
 /** phone in landscape screen size **/
 @media screen and (max-width: 640px) {
@@ -154,12 +147,17 @@ h2 {
         width: auto;
     
     }
-    button {
+    button.buttonToBeReplaced {
         height: 150px;
         width: 250px;
         font-size: 20px;
     }
-
+    button#musicOn, button#musicOff {
+        width: 150px;
+        height: 30px;
+        font-size: 16px;
+        border-radius: 20px;
+    }
 }
 
 

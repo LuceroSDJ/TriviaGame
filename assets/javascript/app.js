@@ -62,6 +62,8 @@ $('.buttonToBeReplaced').on('click', function() {
     $('#mainDiv').show();
     //show timer
     $('.timer').show();
+    $('#musicOn').show();
+    $('#musicOff').show();
     printQuestion();
     //decrement time per second with setInterval
     timeCount();
