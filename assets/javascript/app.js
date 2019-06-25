@@ -39,11 +39,11 @@ var ticktock; //setInterval
 var unanswered = 0; //increment by 1 if unanswered
 var correct = 0; //increment by 1 if answered correctly
 var wrong = 0; //increment by onw if answered incorrectly
-var i = 0; //questions array index of objects
+var i = 0; //questions array index of objects starts at zero so the 1st question is rendered to the page
 
 //test music
-var audio = document.createElement("audio");
-audio.setAttribute("src", "assets/images/Audio1.mp3");
+var audio = document.createElement('audio');
+audio.setAttribute('src', 'assets/images/Audio1.mp3');
 
 $('#musicOn').on('click', function() {
     audio.play();
@@ -62,8 +62,8 @@ $('.buttonToBeReplaced').on('click', function() {
     $('#mainDiv').show();
     //show timer
     $('.timer').show();
-    $('#musicOn').show();
-    $('#musicOff').show();
+    // $('#musicOn').show();
+    // $('#musicOff').show();
     printQuestion();
     //decrement time per second with setInterval
     timeCount();
@@ -81,7 +81,8 @@ function printQuestion() {
         $('.thirdOption').text(questions[i].answer3); 
         //reset time 
         secondsPerQuestion = 50;
-    }else{
+    }
+    else {
         clearInterval(ticktock);
         console.log(i);
         // hold results for 5 seconds then show results
@@ -95,7 +96,8 @@ function printQuestion() {
 /*Next, create a click event funciton to capture when an li tag is clicked on.
 & declare conditions comparing user's input to the  VALUE of 'correctAnswer' */
 $('li').on('click', function() { 
-    userInput = $(this).text(); 
+    //return the content of the selected element using .text() method
+    userInput = $(this).text();
     //if var i is less than questions.length, generate the next question
     if(userInput === questions[i].correctAnswer && i < questions.length) {
         console.log(userInput);

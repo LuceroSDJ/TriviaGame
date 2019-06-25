@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
     <title>Trivia Game</title>
     
     <!-- Link to reset file -->
@@ -11,13 +11,12 @@
     <!-- Link to css file -->
     <link rel='stylesheet' text='text/css' href='assets/css/style.css'>
     <!-- Google Fonts link to be added-->
-    <link href="https://fonts.googleapis.com/css?family=Faster+One|Merienda+One|Shojumaru" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Faster+One|Merienda+One|Shojumaru' rel='stylesheet'>
 
 </head>
 <body >
 
-
-<div class="wrapper">  <!-- mx-auto centers our container -->
+<div class='wrapper'>  <!-- mx-auto centers our container -->
 
 <!-- empty div will be replaced -->
 <div class='container'>
@@ -29,9 +28,10 @@
                 <div class='timer'><p>Time Remaining: <span id='timeCountDown'></span></p></div>
                 <br>
                 <div id='mainDiv'>
+                    <!-- Trivia questions will be generated on the fly using jQuery -->
                     <h2></h2><br>
                     <ul>
-                        <!--<li class='firstOption' value='one' onclick="alert(this.innerHTML)"></li>-->
+                        <!--<li class='firstOption' value='one' onclick='alert(this.innerHTML)'></li>-->
                         <li class='firstOption' value='one'></li>
                         <li class='secondOption' value='two'></li>
                         <li class='thirdOption' value='three'></li>
@@ -63,7 +63,7 @@
 
 
     <!-- CDN Link to jQuery website: this method saves the jQuery file in the browser's memory -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src='https://code.jquery.com/jquery-3.3.1.min.js' integrity='sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=' crossorigin='anonymous'></script>
     <!-- Link to js file -->
     <script src='assets/javascript/app.js'></script>
 </body>
