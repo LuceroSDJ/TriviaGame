@@ -24,14 +24,14 @@ var questions = [
         askQuestion: 'Which company, also known as the Internet\'s "Big Bang," introduced the world wide "Navigator" Web Browser in the mid 1990\'s, and developed JavaScript to animate the Web?', 
         answer1: 'Microsoft',
         answer2: 'Nescafé',
-        answer3: 'Nestcape',
-        correctAnswer: 'Nestcape',
+        answer3: 'Netscape',
+        correctAnswer: 'Netscape',
         imgCorrect: 'assets/images/nestcape.jpg',
         imgIncorrect: 'assets/images/box1.gif',
     }
 ];
 
-//initialize global variable that will hold the time 
+//initialize global variables 
 var secondsPerQuestion = 50;   //50 seconds. Here I am adding an extra second because there is a delay, which I will keep trying to fix.
 //initialize variables to keep track of scores
 var userInput; //here I want to capture the value of the li tag the user clicks
@@ -63,28 +63,30 @@ $('.buttonToBeReplaced').on('click', function() {
     $('#mainDiv').show(); //show question & options
     //show timer
     $('.timer').show();
+    $('#timeCountDown').text(secondsPerQuestion);
     //generate questions
     printQuestion();
-    //decrement time per second with setInterval
+    //decrement time by one, which is the second we hold timeCount() with setInterval() method
     timeCount();
-    // ticktock = setInterval(timeCount, 1000);
+    // secondsPerQuestion--;
+    //pass in timeCount() as parameter
+    ticktock = setInterval(timeCount, 1000);
 });
 
 //generate question
 function printQuestion() {
     if(i  < questions.length) {
-        //add question & reset time
+        //add question, reset time & call setInterval() method
         $('h2').text(questions[i].askQuestion);
         $('.firstOption').text(questions[i].answer1);
         $('.secondOption').text(questions[i].answer2);
         $('.thirdOption').text(questions[i].answer3); 
         secondsPerQuestion = 50;
-        ticktock = setInterval(timeCount, 1000);
     }
     else {
-        clearInterval(ticktock);    //stop timer
         console.log(i);
-        /* hold results for 5 seconds by using:
+        clearInterval(ticktock);    //stop timer
+        /* hold results for 5 seconds to display the correct answer for 5 seconds
         ==== setTimeout(pass in function as paramenter, time) ===== */
         var holdResults = setTimeout(displayResults, 5000);  
     }; 
@@ -100,7 +102,7 @@ $('li').on('click', function() {
         console.log(userInput);
         correct++;
         $('#correct').text(correct);  //I am not required to display the point here, but I will keep it here for now
-        //hold image alert for 3 seconds congratulating the user
+        //hold image alert for 5 seconds congratulating the user
         correctImgAlert(); 
         //prevent our printQuestion function from running if current questions index number is equal to questions.length
         i++;
@@ -127,7 +129,7 @@ function correctImgAlert() {
     $('.imgDiv').append(image);
     $('.winMssg').show();
     //then, I need to display the alert message for only 5 seconds
-    holdAlert = setTimeout(function() {  
+    setTimeout(function() {  
         $('.winMssg').hide();
         $('.imgDiv').empty();
         $('#mainDiv').show();
@@ -137,22 +139,32 @@ function correctImgAlert() {
 };
 
 function unansweredAlert() {
+    //stop timer & hide mainDiv to show correct answer
     clearInterval(ticktock);
     $('#mainDiv').hide();
+    //add image on the fly
+    //note: image tag is not hidden, it is just empty at this point. Image is appended in the 5th line below
     var image = $('<img>');
     image.prop('src', questions[i].imgCorrect);
     image.css('height', '35%');
     image.css('width', '40%');
     $('.imgDiv').append(image);
-    $('.showCorrectAnswer').text(questions[i].correctAnswer);
-    $('.unansweredMssg').show();
-    //then, I need to display the alert message for only 2 seconds
-    holdAlert = setTimeout(function() {  
-        $('.unansweredMssg').hide();
-        $('.imgDiv').empty();
-        $('#mainDiv').show();
-        timeCount();
-        ticktock = setInterval(timeCount, 1000); 
+    $('.showCorrectAnswer').text(questions[i].correctAnswer);  //spam.text() with in <p> tag
+    $('.unansweredMssg').show();  //show <p> tag
+    //then, I need to display the alert message for a few seconds, therefore, I must holds the code below for a few seconds as well
+    setTimeout(function() {  
+        if(i < questions.length) {
+            $('.unansweredMssg').hide();
+            $('.imgDiv').empty();
+            $('#mainDiv').show();
+            timeCount();
+            ticktock = setInterval(timeCount, 1000); 
+        }
+        else if(i === questions.length) {
+            $('.unansweredMssg').hide();
+            $('.imgDiv').empty();
+            displayResults();
+        }
     }, 5000);
 };
 
@@ -167,7 +179,7 @@ function incorrectImgAlert() {
     $('.showCorrectAnswer').text(questions[i].correctAnswer);
     $('.mssg').show();
     //then, I need to display the alert message for only 2 seconds
-    holdAlert = setTimeout(function() {  
+    setTimeout(function() {  
         $('.mssg').hide();
         $('.imgDivIncorrect').empty();
         $('#mainDiv').show();
@@ -179,28 +191,29 @@ function incorrectImgAlert() {
 function timeCount() { 
     //set conditions to initiate timer
     if(secondsPerQuestion != 0) {
-        // display count down timer on the page
+        // display count down timer on the page then decrement seconds by one
         $('#timeCountDown').text(secondsPerQuestion);
         secondsPerQuestion--;
-    }else if(!userInput || secondsPerQuestion === 0) { 
-        //check if we have not reached the max number of available questions
-        if(i < questions.length) {
-        i++;
+    }
+    //check if we have not reached the max number of available questions
+    else if(!userInput || secondsPerQuestion === 0 && i < questions.length) { 
         unanswered++;
         $('#unanswered').text(unanswered);
         // display count down timer on the page
         $('#timeCountDown').text(secondsPerQuestion);
         unansweredAlert();
+        i++;
         printQuestion();
-        };
-    };
+    }
 };
 
 //we need the timer to stop /freeze when results are displayed at the end of the game
 function displayResults() {
     //Stop timer from running while results are displayed
     clearInterval(ticktock);
+    //hide mainDiv & timer
     $('#mainDiv').hide();
+    $('.timer').hide();
     $('#resultsDiv').show();         
 };
 
@@ -208,15 +221,15 @@ function displayResults() {
 i must be reset back to 0
 first question needs to be reprinted*/
 $('#restart').on('click', function() {
-    correct = 0;
-    $('#correct').text(correct);
+    i = 0;
     wrong = 0;
-    $('#wrong').text(wrong);
+    correct = 0;
     unanswered = 0;
+    $('#wrong').text(wrong);
+    $('#correct').text(correct);
     $('#unanswered').text(unanswered);
     $('#resultsDiv').hide();
     $('#mainDiv').show();
-    i = 0;
     printQuestion();
     timeCount();
     //set interval
