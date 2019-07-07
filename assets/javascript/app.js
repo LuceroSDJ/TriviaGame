@@ -41,59 +41,56 @@ var correct = 0; //increment by 1 if answered correctly
 var wrong = 0; //increment by onw if answered incorrectly
 var i = 0; //questions array index of objects starts at zero so the 1st question is rendered to the page
 
-//test music
+//music: we include a path to the media we want to embed inside the src attribute
 var audio = document.createElement('audio');
 audio.setAttribute('src', 'assets/images/Audio1.mp3');
-
+//on click event to play audio
 $('#musicOn').on('click', function() {
     audio.play();
 });
 
+//on click event to pause audio
 $('#musicOff').on('click', function() {
     audio.pause();
 });
 
-//select button tag & start on click function
+//select button tag & start "on click" function
 $('.buttonToBeReplaced').on('click', function() {
     audio.play();
-    //select button tag to be removed, and later replaced with new html content (questions)
+    //select button tag to be removed to later replace with new html content (questions)
     $('.buttonToBeReplaced').remove();  
     //show hidden html
-    $('#mainDiv').show();
+    $('#mainDiv').show(); //show question & options
     //show timer
     $('.timer').show();
-    // $('#musicOn').show();
-    // $('#musicOff').show();
+    //generate questions
     printQuestion();
     //decrement time per second with setInterval
     timeCount();
-    ticktock = setInterval(timeCount, 1000);
+    // ticktock = setInterval(timeCount, 1000);
 });
 
 //generate question
 function printQuestion() {
     if(i  < questions.length) {
-        //add question 
+        //add question & reset time
         $('h2').text(questions[i].askQuestion);
-        console.log('i am iside of: ' + i);
         $('.firstOption').text(questions[i].answer1);
         $('.secondOption').text(questions[i].answer2);
         $('.thirdOption').text(questions[i].answer3); 
-        //reset time 
         secondsPerQuestion = 50;
+        ticktock = setInterval(timeCount, 1000);
     }
     else {
-        clearInterval(ticktock);
+        clearInterval(ticktock);    //stop timer
         console.log(i);
-        // hold results for 5 seconds then show results
-        var holdResults = setTimeout(function() { 
-            console.log('release results');
-            displayResults(); 
-    }, 5000);   
-}};
+        /* hold results for 5 seconds by using:
+        ==== setTimeout(pass in function as paramenter, time) ===== */
+        var holdResults = setTimeout(displayResults, 5000);  
+    }; 
+};
 
-
-/*Next, create a click event funciton to capture when an li tag is clicked on.
+/* Next, create a click event function to capture when an li tag is clicked on.
 & declare conditions comparing user's input to the  VALUE of 'correctAnswer' */
 $('li').on('click', function() { 
     //return the content of the selected element using .text() method
@@ -116,8 +113,8 @@ $('li').on('click', function() {
         incorrectImgAlert();  
         i++;
         printQuestion();             
-        };
-    });
+    };
+});
 
 //when user answers a question correctly, an animated alert showd be displayed
 function correctImgAlert() {
@@ -180,21 +177,20 @@ function incorrectImgAlert() {
 };
 
 function timeCount() { 
-    //set conditions for when the time should be running
-    console.log('seconds per question' + secondsPerQuestion);
-    if(0 < secondsPerQuestion) {
+    //set conditions to initiate timer
+    if(secondsPerQuestion != 0) {
+        // display count down timer on the page
         $('#timeCountDown').text(secondsPerQuestion);
-        secondsPerQuestion--; //I changed the order of lines 168 & 169, now timer reaches zero
-    /*the else if statement below will take us to the next question with NO USER INPUT
-    it works if the first question goes unanswered or if all questions go unanswered only */
-    }else if(!userInput || 0 === secondsPerQuestion) {  
+        secondsPerQuestion--;
+    }else if(!userInput || secondsPerQuestion === 0) { 
+        //check if we have not reached the max number of available questions
         if(i < questions.length) {
-        $('#timeCountDown').text(secondsPerQuestion);
+        i++;
         unanswered++;
         $('#unanswered').text(unanswered);
+        // display count down timer on the page
+        $('#timeCountDown').text(secondsPerQuestion);
         unansweredAlert();
-        i++;
-        console.log('this is i: ' + i);
         printQuestion();
         };
     };
