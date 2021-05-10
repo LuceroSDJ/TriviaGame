@@ -77,7 +77,7 @@ $('.buttonToBeReplaced').on('click', function() {
 function printQuestion() {
     if(i  < questions.length) {
         //add question, reset time & call setInterval() method
-        $('h2').text(questions[i].askQuestion);
+        $('.question').text(questions[i].askQuestion);
         $('.firstOption').text(questions[i].answer1);
         $('.secondOption').text(questions[i].answer2);
         $('.thirdOption').text(questions[i].answer3); 
@@ -92,19 +92,17 @@ function printQuestion() {
     }; 
 };
 
-/* Next, create a click event function to capture when an li tag is clicked on.
-& declare conditions comparing user's input to the  VALUE of 'correctAnswer' */
-$('li').on('click', function() { 
+
+function clickEvent() {
     //return the content of the selected element using .text() method
-    userInput = $(this).text();
-    //if var i is less than questions.length, generate the next question
+    userInput = $(this).text();  
     if(userInput === questions[i].correctAnswer && i < questions.length) {
         console.log(userInput);
         correct++;
         $('#correct').text(correct);  //I am not required to display the point here, but I will keep it here for now
         //hold image alert for 5 seconds congratulating the user
-        correctImgAlert(); 
         //prevent our printQuestion function from running if current questions index number is equal to questions.length
+        correctImgAlert(); 
         i++;
         printQuestion(); 
     }else if(userInput !== questions[i].correctAnswer && i < questions.length) {
@@ -116,7 +114,47 @@ $('li').on('click', function() {
         i++;
         printQuestion();             
     };
-});
+}
+
+
+/* Next, create a click event function to capture when an li tag is clicked on.
+& declare conditions comparing user's input to the  VALUE of 'correctAnswer' */
+$('li').on('click', clickEvent);
+
+
+
+// ++++++++++++++++++++++++++++++++++++++++++++++++
+
+            // /* Next, create a click event function to capture when an li tag is clicked on.
+            // & declare conditions comparing user's input to the  VALUE of 'correctAnswer' */
+            // $('li').on('click', function() { 
+            //     //return the content of the selected element using .text() method
+            //     userInput = $(this).text();
+            //     //if var i is less than questions.length, generate the next question
+            //     if(userInput === questions[i].correctAnswer && i < questions.length) {
+            //         console.log(userInput);
+            //         correct++;
+            //         $('#correct').text(correct);  //I am not required to display the point here, but I will keep it here for now
+            //         //hold image alert for 5 seconds congratulating the user
+            //         //prevent our printQuestion function from running if current questions index number is equal to questions.length
+            //         correctImgAlert(); 
+            //         i++;
+            //         printQuestion(); 
+            //     }else if(userInput !== questions[i].correctAnswer && i < questions.length) {
+            //         //increment wrong by 1
+            //         wrong++;
+            //         $('#wrong').text(wrong);
+            //         //alert user answer is wrong and display the correct answer
+            //         incorrectImgAlert();  
+            //         i++;
+            //         printQuestion();             
+            //     };
+            // });
+// +++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
 
 //when user answers a question correctly, an animated alert showd be displayed
 function correctImgAlert() {
