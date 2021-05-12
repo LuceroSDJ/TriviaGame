@@ -41,6 +41,8 @@ var correct = 0; //increment by 1 if answered correctly
 var wrong = 0; //increment by onw if answered incorrectly
 var i = 0; //questions array index of objects starts at zero so the 1st question is rendered to the page
 
+
+
 //music: we include a path to the media we want to embed inside the src attribute
 var audio = document.createElement('audio');
 audio.setAttribute('src', 'assets/images/Audio1.mp3');
@@ -54,24 +56,10 @@ $('#musicOff').on('click', function() {
     audio.pause();
 });
 
-//select button tag & start "on click" function
-$('.buttonToBeReplaced').on('click', function() {
-    audio.play();
-    //select button tag to be removed to later replace with new html content (questions)
-    $('.buttonToBeReplaced').remove();  
-    //show hidden html
-    $('#mainDiv').show(); //show question & options
-    //show timer
-    $('.timer').show();
-    $('#timeCountDown').text(secondsPerQuestion);
-    //generate questions
-    printQuestion();
-    //decrement time by one, which is the second we hold timeCount() with setInterval() method
-    timeCount();
-    // secondsPerQuestion--;
-    //pass in timeCount() as parameter
-    ticktock = setInterval(timeCount, 1000);
-});
+
+
+
+
 
 //generate question
 function printQuestion() {
@@ -91,6 +79,54 @@ function printQuestion() {
         var holdResults = setTimeout(displayResults, 5000);  
     }; 
 };
+
+
+
+
+
+function timeCount() { 
+    //set conditions to initiate timer
+    if(secondsPerQuestion != 0) {
+        // display count down timer on the page then decrement seconds by one
+        $('#timeCountDown').text(secondsPerQuestion);
+        secondsPerQuestion--;
+        $('#unanswered').text(unanswered);
+    }
+    //check if we have not reached the max number of available questions
+    else if(!userInput || secondsPerQuestion === 0 && i < questions.length) { 
+        unanswered++;
+        $('#unanswered').text(unanswered);
+        // display count down timer on the page
+        $('#timeCountDown').text(secondsPerQuestion);
+        unansweredAlert();
+        i++;
+        printQuestion();
+    }
+};
+
+
+
+
+//select button tag & start "on click" function
+$('.buttonToBeReplaced').on('click', function() {
+    $(".emptyDiv").css("background-color","green");
+    audio.play();
+    //select button tag to be removed to later replace with new html content (questions)
+    $('.buttonToBeReplaced').hide(1000);    
+    //show hidden html
+    $('#mainDiv').show(1000); //show question & options
+    //show timer
+    $('.timer').show();
+    $('#timeCountDown').text(secondsPerQuestion);
+    //generate questions
+    printQuestion();
+    //decrement time by one, which is the second we hold timeCount() with setInterval() method
+    timeCount();
+    // secondsPerQuestion--;
+    //pass in timeCount() as parameter
+    ticktock = setInterval(timeCount, 1000);
+});
+
 
 
 function clickEvent() {
@@ -165,7 +201,7 @@ function correctImgAlert() {
     image.css('height', '35%');
     image.css('width', '40%');
     $('.imgDiv').append(image);
-    $('.winMssg').show();
+    $('.winMssg').show(2000);
     //then, I need to display the alert message for only 5 seconds
     setTimeout(function() {  
         $('.winMssg').hide();
@@ -188,7 +224,7 @@ function unansweredAlert() {
     image.css('width', '40%');
     $('.imgDiv').append(image);
     $('.showCorrectAnswer').text(questions[i].correctAnswer);  //spam.text() with in <p> tag
-    $('.unansweredMssg').show();  //show <p> tag
+    $('.unansweredMssg').show(2000);  //show <p> tag
     //then, I need to display the alert message for a few seconds, therefore, I must holds the code below for a few seconds as well
     setTimeout(function() {  
         if(i < questions.length) {
@@ -226,24 +262,11 @@ function incorrectImgAlert() {
     }, 5000);  
 };
 
-function timeCount() { 
-    //set conditions to initiate timer
-    if(secondsPerQuestion != 0) {
-        // display count down timer on the page then decrement seconds by one
-        $('#timeCountDown').text(secondsPerQuestion);
-        secondsPerQuestion--;
-    }
-    //check if we have not reached the max number of available questions
-    else if(!userInput || secondsPerQuestion === 0 && i < questions.length) { 
-        unanswered++;
-        $('#unanswered').text(unanswered);
-        // display count down timer on the page
-        $('#timeCountDown').text(secondsPerQuestion);
-        unansweredAlert();
-        i++;
-        printQuestion();
-    }
-};
+
+
+
+
+
 
 //we need the timer to stop /freeze when results are displayed at the end of the game
 function displayResults() {

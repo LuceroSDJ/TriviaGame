@@ -1,20 +1,20 @@
 button.buttonToBeReplaced {
     justify-content: center;
-    height: 200px;
-    width: 450px;
-    display: flex;
+    height: 100px;
+    width: 400px;
+    /* display: flex; */
     margin: auto;
     position: absolute;
     top: 50%;
     left: 0;
     right: 0;
     font-family: 'Shojumaru', cursive;
-    font-size: 30px;
-    border-radius: 20px;
-    background-image: url(../images/testB6.gif); 
-    color: white;
+    font-size: 50px;
+    background: #73AD21;
+    color: #063a78;
     overflow: auto;
-    text-shadow: 8px 8px #063a78;
+    text-shadow: 3px 3px black;
+    border: 5px solid #063a78;
 }
 
 button#musicOn, button#musicOff {
@@ -36,10 +36,10 @@ button#musicOn, button#musicOff {
     border: 6px solid #73AD21;
     padding: 10px;
     box-shadow: 16px 18px black;
-    background-image: url(../images/box2.jpg);
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    background-position: center;
+    /* background-image: url(../images/box2.jpg); */
+    /* background-size: 100% 100%; */
+    /* background-repeat: no-repeat;
+    background-position: center; */
     position: absolute;
     left:0; 
     right:0;
@@ -80,8 +80,15 @@ li, .timer, .winMssg, .mssg, #resultsDiv, .unansweredMssg {
 }
 
 body {
-    background-image: url(../images/button1.gif);
-    opacity: 0.8;
+    /* background-image: url(../images/button1.gif); */
+    /* background-image: url(../images/background.jpg);
+    background-repeat: no-repeat;
+    opacity: 0.9;
+    height: 100%;
+    background-size: cover;
+*/
+    background: url(../images/background.jpg) no-repeat center center fixed;
+    background-size: cover;
 }
 
 img {
@@ -90,7 +97,7 @@ img {
 
 h1 {
     font-family: 'Faster One', cursive;
-    font-size: 70px;
+    font-size: 80px;
     color: #063a78;
     text-shadow: 3px 3px rgb(146, 204, 65);
 }
