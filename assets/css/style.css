@@ -1,4 +1,4 @@
-button.buttonToBeReplaced {
+button.startButton {
     justify-content: center;
     height: 100px;
     width: 400px;
@@ -33,13 +33,9 @@ button#musicOn, button#musicOff {
 .emptyDiv {
     width: 80%;
     height: 80%;
-    border: 6px solid #73AD21;
+    /* border: 6px solid #73AD21; */
     padding: 10px;
     box-shadow: 16px 18px black;
-    /* background-image: url(../images/box2.jpg); */
-    /* background-size: 100% 100%; */
-    /* background-repeat: no-repeat;
-    background-position: center; */
     position: absolute;
     left:0; 
     right:0;

@@ -32,10 +32,10 @@ var questions = [
 ];
 
 //initialize global variables 
-var secondsPerQuestion = 50;   //50 seconds. Here I am adding an extra second because there is a delay, which I will keep trying to fix.
+var counter = 50;   //50 seconds. Here I am adding an extra second because there is a delay, which I will keep trying to fix.
 //initialize variables to keep track of scores
 var userInput; //here I want to capture the value of the li tag the user clicks
-var ticktock; //setInterval
+var interval; //setInterval
 var unanswered = 0; //increment by 1 if unanswered
 var correct = 0; //increment by 1 if answered correctly
 var wrong = 0; //increment by onw if answered incorrectly
@@ -58,9 +58,6 @@ $('#musicOff').on('click', function() {
 
 
 
-
-
-
 //generate question
 function printQuestion() {
     if(i  < questions.length) {
@@ -69,36 +66,35 @@ function printQuestion() {
         $('.firstOption').text(questions[i].answer1);
         $('.secondOption').text(questions[i].answer2);
         $('.thirdOption').text(questions[i].answer3); 
-        secondsPerQuestion = 50;
+        counter = 50;
     }
     else {
-        console.log(i);
-        clearInterval(ticktock);    //stop timer
+        clearInterval(interval);    //stop timer
         /* hold results for 5 seconds to display the correct answer for 5 seconds
-        ==== setTimeout(pass in function as paramenter, time) ===== */
-        var holdResults = setTimeout(displayResults, 5000);  
+        ==== setTimeout(pass in function as paramenter, time) ===== */ 
+        setTimeout(displayResults, 5000); 
     }; 
 };
 
 
 
-
-
 function timeCount() { 
     //set conditions to initiate timer
-    if(secondsPerQuestion != 0) {
+    if(counter != 0) {
         // display count down timer on the page then decrement seconds by one
-        $('#timeCountDown').text(secondsPerQuestion);
-        secondsPerQuestion--;
+        $('#timeCountDown').text(counter);
+        counter--;
         $('#unanswered').text(unanswered);
     }
     //check if we have not reached the max number of available questions
-    else if(!userInput || secondsPerQuestion === 0 && i < questions.length) { 
+    else if(!userInput || counter === 0 && i < questions.length) {
         unanswered++;
-        $('#unanswered').text(unanswered);
         // display count down timer on the page
-        $('#timeCountDown').text(secondsPerQuestion);
+        $('#timeCountDown').text(counter);
         unansweredAlert();
+        $('#unanswered').text(unanswered);
+        $('#wrong').text(wrong);
+        $('#correct').text(correct);
         i++;
         printQuestion();
     }
@@ -106,25 +102,24 @@ function timeCount() {
 
 
 
-
 //select button tag & start "on click" function
-$('.buttonToBeReplaced').on('click', function() {
-    $(".emptyDiv").css("background-color","green");
+$('.startButton').on('click', function() {
     audio.play();
-    //select button tag to be removed to later replace with new html content (questions)
-    $('.buttonToBeReplaced').hide(1000);    
+    $(".emptyDiv").css("background-color","green");
+    //hide button tag to be replaced and display questions
+    $('.startButton').hide(1000);    
     //show hidden html
     $('#mainDiv').show(1000); //show question & options
     //show timer
+    $('#timeCountDown').text(counter);
     $('.timer').show();
-    $('#timeCountDown').text(secondsPerQuestion);
     //generate questions
     printQuestion();
     //decrement time by one, which is the second we hold timeCount() with setInterval() method
     timeCount();
-    // secondsPerQuestion--;
+    // counter--;
     //pass in timeCount() as parameter
-    ticktock = setInterval(timeCount, 1000);
+    interval = setInterval(timeCount, 1000);
 });
 
 
@@ -158,43 +153,9 @@ function clickEvent() {
 $('li').on('click', clickEvent);
 
 
-
-// ++++++++++++++++++++++++++++++++++++++++++++++++
-
-            // /* Next, create a click event function to capture when an li tag is clicked on.
-            // & declare conditions comparing user's input to the  VALUE of 'correctAnswer' */
-            // $('li').on('click', function() { 
-            //     //return the content of the selected element using .text() method
-            //     userInput = $(this).text();
-            //     //if var i is less than questions.length, generate the next question
-            //     if(userInput === questions[i].correctAnswer && i < questions.length) {
-            //         console.log(userInput);
-            //         correct++;
-            //         $('#correct').text(correct);  //I am not required to display the point here, but I will keep it here for now
-            //         //hold image alert for 5 seconds congratulating the user
-            //         //prevent our printQuestion function from running if current questions index number is equal to questions.length
-            //         correctImgAlert(); 
-            //         i++;
-            //         printQuestion(); 
-            //     }else if(userInput !== questions[i].correctAnswer && i < questions.length) {
-            //         //increment wrong by 1
-            //         wrong++;
-            //         $('#wrong').text(wrong);
-            //         //alert user answer is wrong and display the correct answer
-            //         incorrectImgAlert();  
-            //         i++;
-            //         printQuestion();             
-            //     };
-            // });
-// +++++++++++++++++++++++++++++++++++++++++++++
-
-
-
-
-
 //when user answers a question correctly, an animated alert showd be displayed
 function correctImgAlert() {
-    clearInterval(ticktock);
+    clearInterval(interval);
     $('#mainDiv').hide();
     var image = $('<img>');
     image.prop('src', questions[i].imgCorrect);
@@ -208,14 +169,14 @@ function correctImgAlert() {
         $('.imgDiv').empty();
         $('#mainDiv').show();
         timeCount();
-        ticktock = setInterval(timeCount, 1000); 
+        interval = setInterval(timeCount, 1000); 
     }, 5000);
 };
 
 function unansweredAlert() {
     //stop timer & hide mainDiv to show correct answer
-    clearInterval(ticktock);
-    $('#mainDiv').hide();
+    clearInterval(interval);
+    $('#mainDiv').hide(1000);
     //add image on the fly
     //note: image tag is not hidden, it is just empty at this point. Image is appended in the 5th line below
     var image = $('<img>');
@@ -232,7 +193,7 @@ function unansweredAlert() {
             $('.imgDiv').empty();
             $('#mainDiv').show();
             timeCount();
-            ticktock = setInterval(timeCount, 1000); 
+            interval = setInterval(timeCount, 1000); 
         }
         else if(i === questions.length) {
             $('.unansweredMssg').hide();
@@ -243,7 +204,7 @@ function unansweredAlert() {
 };
 
 function incorrectImgAlert() {
-    clearInterval(ticktock);
+    clearInterval(interval);
     $('#mainDiv').hide();
     var image = $('<img>');
     image.prop('src', questions[i].imgIncorrect);
@@ -258,12 +219,9 @@ function incorrectImgAlert() {
         $('.imgDivIncorrect').empty();
         $('#mainDiv').show();
         timeCount();
-        ticktock = setInterval(timeCount, 1000); 
+        interval = setInterval(timeCount, 1000); 
     }, 5000);  
 };
-
-
-
 
 
 
@@ -271,11 +229,13 @@ function incorrectImgAlert() {
 //we need the timer to stop /freeze when results are displayed at the end of the game
 function displayResults() {
     //Stop timer from running while results are displayed
-    clearInterval(ticktock);
+    clearInterval(interval);
     //hide mainDiv & timer
     $('#mainDiv').hide();
-    $('.timer').hide();
-    $('#resultsDiv').show();         
+    setTimeout(function() {
+        $('.timer').hide();
+        $('#resultsDiv').show();
+        }, 5000);
 };
 
 /*when restart button is clicked do the following:
@@ -291,11 +251,12 @@ $('#restart').on('click', function() {
     $('#unanswered').text(unanswered);
     $('#resultsDiv').hide();
     $('#mainDiv').show();
+    $('#timeCountDown').text(counter);
+    $('.timer').show();
     printQuestion();
     timeCount();
     //set interval
-    ticktock = setInterval(timeCount, 1000);   
+    interval = setInterval(timeCount, 1000);   
 });
 
-//closes $(document).ready(function() 
-});
+});  //closes $(document).ready(function() 
