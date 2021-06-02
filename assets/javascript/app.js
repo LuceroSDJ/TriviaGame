@@ -8,7 +8,7 @@ var questions = [
         answer2: 'Steve Jobs & Steve Carell',
         answer3: 'Steve Jobs & Steve Harvey',
         correctAnswer: 'Steve Jobs & Steve Wozniak', 
-        imgCorrect: 'assets/images/steves.jpg',
+        imgCorrect: 'assets/images/Steves.jpg',
         imgIncorrect: 'assets/images/box1.gif',
     },
     {
